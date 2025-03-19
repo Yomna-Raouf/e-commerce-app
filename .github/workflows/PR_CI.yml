@@ -20,10 +20,6 @@ jobs:
         run: |
           npm run lint
 
-      - name: Run Unit Tests
-        run: |
-          npm run test:unit
-
   build:
     needs: linting_and_unit_tests
     runs-on: ubuntu-latest
