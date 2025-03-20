@@ -1,24 +1,39 @@
+import { useLoadMoreProducts } from '../../hooks/useLoadMoreProducts';
+
 import type { Product } from '../../types';
 
 import ProductCard from '../ProductCard/ProductCard';
+import Shimmer from '@/components/Shimmer/Shimmer';
+import ListGrid from './ListGrid';
 
 type Props = {
   products: Product[];
 };
 
 const ProductsList = ({ products }: Props) => {
+  const { productsList, hasMoreData, scrollTrigger } = useLoadMoreProducts(products);
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-      {products?.map((product) => (
-        <ProductCard
-          key={product.id}
-          image={product.thumbnail}
-          price={product.price}
-          title={product.title}
-          description={product.description}
-        />
-      ))}
-    </div>
+    <>
+      <ListGrid>
+        {productsList?.map((product) => (
+          <ProductCard
+            key={product.id}
+            image={product.thumbnail}
+            price={product.price}
+            title={product.title}
+            description={product.description}
+          />
+        ))}
+      </ListGrid>
+      {hasMoreData && (
+        <ListGrid classes=" mt-4" ref={scrollTrigger}>
+          {Array.from({ length: 30 }, (_, idx) => (
+            <Shimmer key={idx} />
+          ))}
+        </ListGrid>
+      )}
+    </>
   );
 };
 

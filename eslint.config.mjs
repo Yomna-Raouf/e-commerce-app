@@ -11,7 +11,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ['next/core-web-vitals', 'plugin:prettier/recommended', 'next/typescript'],
+    extends: ['next/core-web-vitals', 'next/typescript'],
     plugins: ['validate-filename'],
     rules: {
       '@next/next/no-img-element': 'off',
