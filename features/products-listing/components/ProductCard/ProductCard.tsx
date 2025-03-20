@@ -9,6 +9,7 @@ type Props = {
   price: number;
 };
 
+// TODO: investigate when to use img vs next Image component
 const ProductCard = ({ image, title, description, price }: Props) => {
   return (
     <CardWrapper
