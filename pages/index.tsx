@@ -6,13 +6,7 @@ import ProductsList from '@/features/products-listing/components/ProductsList/Pr
 const Home = ({ products }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   console.log({ products });
 
-  return (
-    <div className="min-h-screen p-5 pb-20 lg:p-20">
-      <main>
-        <ProductsList products={products} />
-      </main>
-    </div>
-  );
+  return <ProductsList products={products} />;
 };
 
 type Props = {
