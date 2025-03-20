@@ -23,7 +23,7 @@ const PageHead = ({ seoTitle, seoDescription, locale }: Props) => {
             process.env.NODE_ENV === 'development'
               ? 'http://localhost:3000'
               : process.env.NEXT_PUBLIC_URL
-          }/${router.asPath}`}
+          }${router.asPath}`}
           hrefLang="x-default"
         />
 
