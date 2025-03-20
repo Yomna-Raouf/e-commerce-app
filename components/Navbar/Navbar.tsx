@@ -14,9 +14,11 @@ const Navbar = () => {
       </Link>
 
       <Link title="My Cart" href={'/my-cart'} className="relative">
-        <div className="absolute right-0 w-4 h-4 rounded-2xl bg-[var(--purple_500)] text-[var(--neutral_100)] text-xs flex justify-center items-center">
-          <span>{cartCount}</span>
-        </div>
+        {!!cartCount && (
+          <div className="absolute right-0 w-4 h-4 rounded-2xl bg-[var(--purple_500)] text-[var(--neutral_100)] text-xs flex justify-center items-center">
+            <span>{cartCount}</span>
+          </div>
+        )}
         <CartIcon width={35} height={35} fill="var(--purple_800)" />
       </Link>
     </nav>
