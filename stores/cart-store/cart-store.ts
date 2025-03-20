@@ -5,6 +5,7 @@ import type { CartProduct } from '@/features/my-cart/types';
 
 type CartState = {
   cart: CartProduct[];
+  cartCount: number;
   totalPrice: number;
 };
 
@@ -21,7 +22,13 @@ const useCartStore = create<CartStore>()(
     (set, get) => ({
       cart: [],
       totalPrice: 0,
-      addToCart: (product) => set(() => ({ cart: [...get().cart, product] })),
+      cartCount: 0,
+      addToCart: (product) =>
+        set(() => ({
+          cart: [...get().cart, product],
+          cartCount: get().cartCount + 1,
+          totalPrice: 0
+        })),
       updateCartProductCount: (count, id) =>
         set(() => ({
           cart: get().cart.map((cartItem) =>
@@ -48,3 +55,4 @@ export default useCartStore;
 // re calculate total price with cart updates
 // handle images error state
 // store persistance done
+// add page h1 seo content
