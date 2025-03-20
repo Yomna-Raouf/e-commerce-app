@@ -1,13 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type CartProduct = {
-  id: number;
-  title: string;
-  image: string;
-  price: number;
-  count: number;
-};
+import type { CartProduct } from '@/features/my-cart/types';
 
 type CartState = {
   cart: CartProduct[];
