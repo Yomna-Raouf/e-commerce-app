@@ -1,0 +1,30 @@
+import CardWrapper from '@/components/CardWrapper/CardWrapper';
+import ProductCardContent from './ProductCardContent';
+import ProductCardAction from './ProductCardAction';
+
+type Props = {
+  image: string;
+  title: string;
+  description: string;
+  price: number;
+};
+
+const ProductCard = ({ image, title, description, price }: Props) => {
+  return (
+    <CardWrapper
+      image={
+        <img
+          className="w-[200px] h-[200px] drop-shadow-md"
+          alt={title}
+          width={200}
+          height={200}
+          src={image}
+        />
+      }
+      content={<ProductCardContent title={title} description={description} />}
+      actions={[<ProductCardAction key="cart-action" price={price} />]}
+    />
+  );
+};
+
+export default ProductCard;

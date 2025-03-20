@@ -1,12 +1,16 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import type { Product } from '@/features/products-listing/types';
 
+import ProductsList from '@/features/products-listing/components/ProductsList/ProductsList';
+
 const Home = ({ products }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   console.log({ products });
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">Test</main>
+    <div className="min-h-screen p-5 pb-20 lg:p-20">
+      <main>
+        <ProductsList products={products} />
+      </main>
     </div>
   );
 };
