@@ -7,10 +7,11 @@ type Props = {
   title: string;
   description: string;
   price: number;
+  id: number;
 };
 
 // TODO: investigate when to use img vs next Image component
-const ProductCard = ({ image, title, description, price }: Props) => {
+const ProductCard = ({ image, title, description, price, id }: Props) => {
   return (
     <CardWrapper
       image={
@@ -23,7 +24,18 @@ const ProductCard = ({ image, title, description, price }: Props) => {
         />
       }
       content={<ProductCardContent title={title} description={description} />}
-      actions={[<ProductCardAction key="cart-action" price={price} />]}
+      actions={[
+        <ProductCardAction
+          key="cart-action"
+          product={{
+            title,
+            image,
+            price,
+            count: 0,
+            id
+          }}
+        />
+      ]}
     />
   );
 };
