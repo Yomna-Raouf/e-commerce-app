@@ -3,27 +3,44 @@ import useCartStore from '@/stores/cart-store/cart-store';
 import type { CartProduct } from '@/features/my-cart/types';
 
 import CartIcon from '@/components/Icons/CartIcon';
+import DeleteIcon from '@/components/Icons/DeleteIcon';
+import Button, { BUTTON_TYPE_CLASSES } from '@/components/Button/Button';
 
 type Props = {
   product: CartProduct;
 };
 
 const ProductCardAction = ({ product }: Props) => {
-  const { addToCart } = useCartStore();
+  const { addToCart, cart } = useCartStore();
+
+  const inCartProduct = cart.find(({ id }) => id === product.id);
+
+  console.log({ inCartProduct });
 
   return (
     <div className="flex justify-between gap-2">
       <span className="text-[var(--purple_800)] font-bold">
         {product.price} <sub className="text-[var(--purple_400)]">EGP</sub>
       </span>
-      <button
-        className="w-8 h-8 rounded-4xl bg-[var(--purple_800)] hover:bg-[var(--purple_500)] text-[var(--neutral_100)] text-sm font-medium cursor-pointer flex justify-center items-center"
-        onClick={() => {
-          addToCart(product);
-        }}
-      >
-        <CartIcon width={20} height={20} fill="var(--neutral_100)" />
-      </button>
+
+      {inCartProduct ? (
+        <div className="w-28 h-8 rounded-4xl border border-[var(--purple_800)] flex items-center justify-between p-2">
+          <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>
+            {inCartProduct.count === 1 ? <DeleteIcon width={15} height={15} /> : '-'}
+          </Button>
+          <span className="text-[var(--purple_500)]">{inCartProduct.count}</span>
+          <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>+</Button>
+        </div>
+      ) : (
+        <Button
+          customClass="w-8 h-8"
+          onClick={() => {
+            addToCart(product);
+          }}
+        >
+          <CartIcon width={20} height={20} fill="var(--neutral_100)" />
+        </Button>
+      )}
     </div>
   );
 };

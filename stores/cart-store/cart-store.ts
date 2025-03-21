@@ -25,7 +25,7 @@ const useCartStore = create<CartStore>()(
       cartCount: 0,
       addToCart: (product) =>
         set(() => ({
-          cart: [...get().cart, product],
+          cart: [...get().cart, { ...product, count: 1 }],
           cartCount: get().cartCount + 1,
           totalPrice: 0
         })),
