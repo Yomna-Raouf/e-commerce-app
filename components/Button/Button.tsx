@@ -16,8 +16,8 @@ type Props = {
 const getButton = (buttonType: ButtonType = BUTTON_TYPE_CLASSES.base): string =>
   ({
     [BUTTON_TYPE_CLASSES.base]:
-      'rounded-4xl bg-[var(--purple_800)] hover:bg-[var(--purple_500)] text-[var(--neutral_100)] text-sm font-medium cursor-pointer flex justify-center items-center',
-    [BUTTON_TYPE_CLASSES.inverted]: 'cursor-pointer text-[var(--purple_800)] text-xl'
+      'rounded-4xl bg-[var(--purple_800)] hover:bg-[var(--purple_500)] text-[var(--neutral_100)] text-sm md:text-base font-medium cursor-pointer flex justify-center items-center',
+    [BUTTON_TYPE_CLASSES.inverted]: 'cursor-pointer text-[var(--purple_800)] text-sm md:text-base'
   })[buttonType];
 
 // TODO: create spinner component

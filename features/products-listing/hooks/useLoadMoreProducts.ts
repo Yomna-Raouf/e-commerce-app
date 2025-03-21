@@ -9,6 +9,7 @@ export const useLoadMoreProducts = (products: Product[]) => {
   const [productsList, setProductsList] = useState(products);
   const [hasMoreData, setHasMoreData] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<null | string>(null);
 
   const loadMoreProducts = async () => {
     try {
@@ -24,6 +25,7 @@ export const useLoadMoreProducts = (products: Product[]) => {
       setIsLoading(false);
       setProductsList((prevState) => [...prevState, ...data.products]);
     } catch (e) {
+      setError('Ooops! Something went wrong');
       console.log({ e });
     }
   };
@@ -56,6 +58,7 @@ export const useLoadMoreProducts = (products: Product[]) => {
   return {
     productsList,
     hasMoreData,
-    scrollTrigger
+    scrollTrigger,
+    error
   };
 };

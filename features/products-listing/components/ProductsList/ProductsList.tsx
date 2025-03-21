@@ -11,7 +11,7 @@ type Props = {
 };
 
 const ProductsList = ({ products }: Props) => {
-  const { productsList, hasMoreData, scrollTrigger } = useLoadMoreProducts(products);
+  const { productsList, hasMoreData, scrollTrigger, error } = useLoadMoreProducts(products);
 
   return (
     <>
@@ -28,12 +28,14 @@ const ProductsList = ({ products }: Props) => {
         ))}
       </ListGrid>
       {hasMoreData && (
-        <ListGrid classes=" mt-4" ref={scrollTrigger}>
+        <ListGrid classes="mt-4" ref={scrollTrigger}>
           {Array.from({ length: 30 }, (_, idx) => (
             <Shimmer key={idx} />
           ))}
         </ListGrid>
       )}
+
+      {error && <p className="mt-4 text-red-400">{error}</p>}
     </>
   );
 };

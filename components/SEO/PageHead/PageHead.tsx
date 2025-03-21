@@ -6,10 +6,9 @@ import { NextSeo } from 'next-seo';
 type Props = {
   seoTitle: string;
   seoDescription?: string;
-  locale: string;
 };
 
-const PageHead = ({ seoTitle, seoDescription, locale }: Props) => {
+const PageHead = ({ seoTitle, seoDescription }: Props) => {
   const router = useRouter();
 
   const socialMediaImg = '';
@@ -37,7 +36,7 @@ const PageHead = ({ seoTitle, seoDescription, locale }: Props) => {
         canonical={`${process.env.NEXT_PUBLIC_URL}${router.asPath}`}
         openGraph={{
           type: 'website',
-          locale,
+          locale: 'en',
           url: `${process.env.NEXT_PUBLIC_URL}${router.asPath}`,
           site_name: 'q84sale',
           title: `${seoTitle}`,

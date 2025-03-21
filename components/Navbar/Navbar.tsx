@@ -8,7 +8,7 @@ const Navbar = () => {
   const { cartCount } = useCartStore();
 
   return (
-    <nav className="px-5 py-3.5 lg:px-20 lg:py-5 shadow flex justify-between items-center">
+    <nav className="px-5 py-3.5 lg:px-14 lg:py-5 shadow flex justify-between items-center">
       <Link title="Home" href={'/'} className="font-bold text-[var(--neutral_900)] text-xl">
         E-COMMERCE
       </Link>

@@ -5,15 +5,17 @@ type CardWrapperProps = {
   image?: React.ReactNode;
   content?: React.ReactNode;
   actions?: React.ReactNode[];
+  wrapperCustomClass?: string;
 };
 
 type ActionsNodeProps = {
   actions: React.ReactNode[];
+  layout?: 'vertical' | 'horizontal';
 };
 
-const ActionsNode = ({ actions }: ActionsNodeProps) => {
+const ActionsNode = ({ actions, layout }: ActionsNodeProps) => {
   return (
-    <ul className="w-full">
+    <ul className={`${layout === 'horizontal' ? 'ml-auto' : 'w-full'} `}>
       {actions.map<React.ReactNode>((action, index) => {
         return (
           <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
@@ -25,15 +27,25 @@ const ActionsNode = ({ actions }: ActionsNodeProps) => {
   );
 };
 
-const CardWrapper = ({ layout = 'vertical', image, content, actions }: CardWrapperProps) => {
+const CardWrapper = ({
+  image,
+  content,
+  actions,
+  wrapperCustomClass = '',
+  layout = 'vertical'
+}: CardWrapperProps) => {
   return (
-    <div className="border border-[var(--neutral_200)] rounded-lg shadow-xs py-2 px-3">
-      <div className={`flex ${layout === 'vertical' ? 'flex-col' : 'flex-row'} items-center gap-3`}>
+    <div
+      className={`border border-[var(--neutral_200)] rounded-lg shadow-xs py-2 px-3 ${wrapperCustomClass}`}
+    >
+      <div
+        className={`h-full flex ${layout === 'vertical' ? 'flex-col' : 'flex-row'} items-center gap-3`}
+      >
         {image}
 
-        <div>{content}</div>
+        {content}
 
-        {!!actions?.length && <ActionsNode actions={actions} />}
+        {!!actions?.length && <ActionsNode actions={actions} layout={layout} />}
       </div>
     </div>
   );

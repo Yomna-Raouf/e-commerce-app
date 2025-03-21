@@ -55,14 +55,4 @@ const useCartStore = create<CartStore>()(
 export default useCartStore;
 
 // TODO:
-// my-cart page client side
-// add to cart CartActions
-// cart item quatity
-// cart modeling
-// cart ui
-// app head
-// cart types
-// re calculate total price with cart updates
 // handle images error state
-// store persistance done
-// add page h1 seo content

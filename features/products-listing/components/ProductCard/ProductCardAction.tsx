@@ -16,15 +16,16 @@ const ProductCardAction = ({ product }: Props) => {
   const inCartProduct = cart.find(({ id }) => id === product.id);
 
   return (
-    <div className="flex justify-between gap-2">
-      <span className="text-[var(--purple_800)] font-bold">
-        {product.price} <sub className="text-[var(--purple_400)]">EGP</sub>
+    <div className="flex justify-between items-center gap-2">
+      <span className="text-[var(--purple_800)] font-bold text-sm md:text-base">
+        {product.price} <span className="text-[var(--purple_400)] text-xs md:text-sm">LE</span>
       </span>
 
       {inCartProduct ? (
         <CartActionButton product={product} />
       ) : (
         <Button
+          name="add to cart"
           customClass="w-8 h-8"
           onClick={() => {
             addToCart(product);
