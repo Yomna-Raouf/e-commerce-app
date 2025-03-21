@@ -3,6 +3,7 @@ import React from 'react';
 import type { CartProduct } from '../types';
 
 import CardWrapper from '@/components/CardWrapper/CardWrapper';
+import CartActionButton from '@/components/CartActionButton/CartActionButton';
 
 type Props = {
   cartItem: CartProduct;
@@ -27,7 +28,7 @@ const CartItemCard = ({ cartItem }: Props) => {
           <p className="text-[var(--neutral_500)] text-sm font-medium">{cartItem.price} EGP</p>
         </div>
       }
-      actions={[<h1 key="change-cart">sdfsdfsd</h1>]}
+      actions={[<CartActionButton key="cart-action" product={cartItem} />]}
     />
   );
 };
