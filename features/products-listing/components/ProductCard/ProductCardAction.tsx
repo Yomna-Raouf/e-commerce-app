@@ -11,7 +11,7 @@ type Props = {
 };
 
 const ProductCardAction = ({ product }: Props) => {
-  const { addToCart, cart } = useCartStore();
+  const { addToCart, removeFromCart, updateCartProductCount, cart } = useCartStore();
 
   const inCartProduct = cart.find(({ id }) => id === product.id);
 
@@ -25,11 +25,24 @@ const ProductCardAction = ({ product }: Props) => {
 
       {inCartProduct ? (
         <div className="w-28 h-8 rounded-4xl border border-[var(--purple_800)] flex items-center justify-between p-2">
-          <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.inverted}
+            onClick={() => {
+              if (inCartProduct.count === 1) removeFromCart(inCartProduct.id, product.price);
+              else updateCartProductCount(inCartProduct.id, inCartProduct.price, false);
+            }}
+          >
             {inCartProduct.count === 1 ? <DeleteIcon width={15} height={15} /> : '-'}
           </Button>
           <span className="text-[var(--purple_500)]">{inCartProduct.count}</span>
-          <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>+</Button>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.inverted}
+            onClick={() => {
+              updateCartProductCount(inCartProduct.id, inCartProduct.price, true);
+            }}
+          >
+            +
+          </Button>
         </div>
       ) : (
         <Button
