@@ -11,8 +11,8 @@ type CartState = {
 
 type CartActions = {
   addToCart: (_product: CartProduct) => void;
-  updateCartProductCount: (_count: number, _id: number) => void; // increment or decrement
-  removeFromCart: (_id: number) => void;
+  updateCartProductCount: (_id: number, _price: number, _isIncrementing: boolean) => void;
+  removeFromCart: (_id: number, _price: number) => void;
 };
 
 type CartStore = CartState & CartActions;
@@ -25,18 +25,28 @@ const useCartStore = create<CartStore>()(
       cartCount: 0,
       addToCart: (product) =>
         set(() => ({
-          cart: [...get().cart, product],
+          cart: [...get().cart, { ...product, count: 1 }],
           cartCount: get().cartCount + 1,
-          totalPrice: 0
+          totalPrice: get().totalPrice + product.price
         })),
-      updateCartProductCount: (count, id) =>
+
+      updateCartProductCount: (id, price, isIncrementing) =>
         set(() => ({
           cart: get().cart.map((cartItem) =>
-            cartItem.id === id ? { ...cartItem, count } : cartItem
-          )
+            cartItem.id === id
+              ? { ...cartItem, count: isIncrementing ? cartItem.count + 1 : cartItem.count - 1 }
+              : cartItem
+          ),
+          cartCount: get().cartCount,
+          totalPrice: isIncrementing ? get().totalPrice + price : get().totalPrice - price
         })),
-      removeFromCart: (id) =>
-        set(() => ({ cart: get().cart.filter((cartItem) => cartItem.id !== id) }))
+
+      removeFromCart: (id, price) =>
+        set(() => ({
+          cart: get().cart.filter((cartItem) => cartItem.id !== id),
+          cartCount: get().cartCount - 1,
+          totalPrice: get().totalPrice - price
+        }))
     }),
     { name: 'cart-store' }
   )

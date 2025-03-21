@@ -1,10 +1,6 @@
-type Props = {
-  fill: string;
-  width?: number;
-  height?: number;
-};
+import { IconProps } from '@/types/icons';
 
-const CartIcon = ({ fill = 'var(--purple_800)', width = 24, height = 24 }: Props) => {
+const CartIcon = ({ fill = 'var(--purple_800)', width = 24, height = 24 }: IconProps) => {
   return (
     <svg height={height} viewBox="0 0 24 24" width={width} xmlns="http://www.w3.org/2000/svg">
       <path
