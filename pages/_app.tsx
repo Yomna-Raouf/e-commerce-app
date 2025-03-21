@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
       <Header />
-      <main className="min-h-screen p-5 pb-20 lg:p-20">
+      <main className="min-h-screen p-5 lg:p-14 ">
         <Component {...pageProps} />
       </main>
     </ErrorBoundary>
